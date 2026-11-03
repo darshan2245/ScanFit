@@ -268,7 +268,7 @@
       {
         id: 'lat-pulldown',
         youtubeId: 'CAwf7n6Luuc',
-        videoUrl: videoUrl: 'https://drive.google.com/file/d/1sFHWvtYuYlpRwBueOKKdHaVbQlGWaozC/preview',
+        videoUrl: 'https://drive.google.com/file/d/1sFHWvtYuYlpRwBueOKKdHaVbQlGWaozC/preview',
         number: '01',
         name: 'Lat Pulldown',
         type: 'Cable Compound Pull',
@@ -1360,66 +1360,185 @@
       // Biomechanical Movement SVG Engine
             // Enhanced Anatomically Contoured Human Biomechanics Engine
       renderBiomechanicsSvg(type) {
-        if (type === 'lat') {
+                if (type === 'lat') {
           return `
-            <svg viewBox="0 0 340 230" class="w-full h-full max-w-sm text-cream-100" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 380 260" class="w-full h-full max-w-md text-cream-100" xmlns="http://www.w3.org/2000/svg">
               <defs>
-                <linearGradient id="gymPad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#233755"/>
-                  <stop offset="100%" stop-color="#0F1B2D"/>
+                <!-- Glowing Muscle Pulsing Radial Gradients -->
+                <radialGradient id="latMuscleGlow" cx="50%" cy="50%" r="60%">
+                  <stop offset="0%" stop-color="#FF8800" stop-opacity="1"/>
+                  <stop offset="40%" stop-color="#FF4800" stop-opacity="0.95"/>
+                  <stop offset="85%" stop-color="#FF2200" stop-opacity="0.8"/>
+                  <stop offset="100%" stop-color="#FF0000" stop-opacity="0"/>
+                </radialGradient>
+                <radialGradient id="helperMuscleGlow" cx="50%" cy="50%" r="60%">
+                  <stop offset="0%" stop-color="#FFAA55" stop-opacity="0.9"/>
+                  <stop offset="80%" stop-color="#FF6B35" stop-opacity="0.6"/>
+                  <stop offset="100%" stop-color="#FF6B35" stop-opacity="0"/>
+                </radialGradient>
+
+                <linearGradient id="chromeSteel" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#4A5D78"/>
+                  <stop offset="45%" stop-color="#E2E8F0"/>
+                  <stop offset="55%" stop-color="#FFFFFF"/>
+                  <stop offset="75%" stop-color="#718096"/>
+                  <stop offset="100%" stop-color="#2D3748"/>
                 </linearGradient>
-                <linearGradient id="humanSkin" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#FAF8F4"/>
-                  <stop offset="100%" stop-color="#D5D1C6"/>
+
+                <linearGradient id="bodySkin" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#F1ECE1"/>
+                  <stop offset="50%" stop-color="#D4CABE"/>
+                  <stop offset="100%" stop-color="#9C8E7D"/>
                 </linearGradient>
+
+                <filter id="hyperGlow" x="-30%" y="-30%" width="160%" height="160%">
+                  <feGaussianBlur stdDeviation="7" result="blur1"/>
+                  <feGaussianBlur stdDeviation="14" result="blur2"/>
+                  <feMerge>
+                    <feMergeNode in="blur2"/>
+                    <feMergeNode in="blur1"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
               </defs>
 
-              <!-- Machine Overhead Frame & Pulley -->
-              <rect x="166" y="8" width="8" height="32" rx="2" fill="#233755"/>
-              <path d="M 60 22 L 280 22" stroke="#16253B" stroke-width="8" stroke-linecap="round"/>
-              <circle cx="170" cy="22" r="9" fill="#FF6B35" stroke="#09101C" stroke-width="2"/>
-              <circle cx="170" cy="22" r="3" fill="#FAF8F4"/>
+              <style>
+                @keyframes latConcentricMotion {
+                  0%, 100% { transform: translateY(0); }
+                  45%, 55% { transform: translateY(42px); }
+                }
+                @keyframes latArmsCurl {
+                  0%, 100% { transform: translateY(0) scaleY(1); }
+                  45%, 55% { transform: translateY(38px) scaleY(0.82); }
+                }
+                @keyframes latExpansionGlow {
+                  0%, 100% {
+                    transform: scale(0.96);
+                    opacity: 0.35;
+                    filter: drop-shadow(0 0 4px #FF4800);
+                  }
+                  45%, 55% {
+                    transform: scale(1.18);
+                    opacity: 1;
+                    filter: drop-shadow(0 0 22px #FF3700) drop-shadow(0 0 35px #FFAA00);
+                  }
+                }
+                @keyframes barCableGleam {
+                  0%, 100% { stroke-dashoffset: 0; }
+                  50% { stroke-dashoffset: 20; }
+                }
+                .anim-lat-rig { animation: latConcentricMotion 2.8s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite; }
+                .anim-arms-rig { animation: latArmsCurl 2.8s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite; transform-origin: 190px 125px; }
+                .anim-lat-flare { animation: latExpansionGlow 2.8s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite; transform-origin: 190px 145px; }
+              </style>
 
-              <!-- Seat & Thigh Roller Pads -->
-              <rect x="145" y="155" width="50" height="14" rx="5" fill="url(#gymPad)" stroke="#16253B" stroke-width="1.5"/>
-              <rect x="165" y="169" width="10" height="50" fill="#16253B"/>
-              <rect x="135" y="128" width="70" height="12" rx="6" fill="#FF6B35" stroke="#09101C" stroke-width="1.5"/>
+              <!-- GYM TOWER OVERHEAD STRUCTURE -->
+              <!-- Vertical Guide Rods -->
+              <line x1="85" y1="20" x2="85" y2="240" stroke="#16253B" stroke-width="6"/>
+              <line x1="295" y1="20" x2="295" y2="240" stroke="#16253B" stroke-width="6"/>
+              <!-- Top Main Beam -->
+              <rect x="70" y="16" width="240" height="14" rx="4" fill="#0F1B2D" stroke="#233755" stroke-width="2"/>
+              <!-- Dual Top Swivel Pulleys -->
+              <circle cx="190" cy="23" r="14" fill="#16253B" stroke="#FF6B35" stroke-width="2.5"/>
+              <circle cx="190" cy="23" r="5" fill="#FAF8F4"/>
+              
+              <!-- Seat & Thigh Roller Pads (Proper Posture Anchoring) -->
+              <rect x="155" y="185" width="70" height="16" rx="6" fill="#16253B" stroke="#233755" stroke-width="2"/>
+              <rect x="185" y="201" width="10" height="45" fill="#0F1B2D"/>
+              <!-- Ergonomic Contoured Thigh Clamp Rollers -->
+              <rect x="140" y="152" width="100" height="15" rx="7.5" fill="#FF6B35" stroke="#09101C" stroke-width="2"/>
+              <circle cx="140" cy="159.5" r="7.5" fill="#FFA47A"/>
+              <circle cx="240" cy="159.5" r="7.5" fill="#FFA47A"/>
 
-              <!-- Moving Lat Bar Cable & Bar Assembly -->
-              <g class="anim-lat">
-                <line x1="170" y1="22" x2="170" y2="58" stroke="#FFA47A" stroke-width="3" stroke-dasharray="3,2"/>
-                <path d="M 72 65 Q 170 54 268 65" stroke="#FF6B35" stroke-width="6" fill="none" stroke-linecap="round"/>
-                <rect x="74" y="60" width="16" height="8" rx="3" fill="#FAF8F4"/>
-                <rect x="250" y="60" width="16" height="8" rx="3" fill="#FAF8F4"/>
+              <!-- MOVING LAT BAR & STEEL CABLE ASSEMBLY -->
+              <g class="anim-lat-rig">
+                <!-- Center Cable from Pulley to Bar -->
+                <line x1="190" y1="23" x2="190" y2="60" stroke="#CBD5E1" stroke-width="3.5" stroke-dasharray="6,2" class="barCableGleam"/>
+                <circle cx="190" cy="60" r="5" fill="#FF6B35"/>
+                <!-- Professional Wide Ergonomic Angled Lat Pulldown Bar -->
+                <path d="M 65 72 L 140 62 L 240 62 L 315 72" stroke="url(#chromeSteel)" stroke-width="7" stroke-linecap="round" fill="none"/>
+                <!-- Knurled Grip Handles -->
+                <line x1="68" y1="71.5" x2="95" y2="68" stroke="#FF6B35" stroke-width="8.5" stroke-linecap="round"/>
+                <line x1="285" y1="68" x2="312" y2="71.5" stroke="#FF6B35" stroke-width="8.5" stroke-linecap="round"/>
+                <!-- Downward Motion Vector Arrows on concentric pull -->
+                <path d="M 85 80 L 85 96 M 81 92 L 85 97 L 89 92" stroke="#FF6B35" stroke-width="2" stroke-linecap="round" fill="none"/>
+                <path d="M 295 80 L 295 96 M 291 92 L 295 97 L 299 92" stroke="#FF6B35" stroke-width="2" stroke-linecap="round" fill="none"/>
               </g>
 
-              <!-- Human Body: Muscular Torso & Head -->
-              <!-- Head with athletic facial angle -->
-              <ellipse cx="170" cy="85" rx="12" ry="14" fill="url(#humanSkin)"/>
-              <path d="M 166 98 L 174 98 L 176 108 L 164 108 Z" fill="#D5D1C6"/>
+              <!-- ATHLETIC REAR-VIEW HUMAN PHYSIQUE -->
+              <!-- Muscular Athletic Head & Neck -->
+              <ellipse cx="190" cy="92" rx="14" ry="16" fill="url(#bodySkin)"/>
+              <path d="M 183 106 L 197 106 L 200 118 L 180 118 Z" fill="#9C8E7D"/>
 
-              <!-- Muscular Back & Lats (Pulsing Orange on pull) -->
-              <path d="M 152 108 C 142 120 144 140 155 152 L 185 152 C 196 140 198 120 188 108 Z" fill="#233755"/>
-              <!-- Winged Latissimus Dorsi Contours -->
-              <path d="M 150 114 C 141 126 142 142 153 150 C 158 138 156 122 150 114 Z" fill="#FF6B35" class="pulse-muscle"/>
-              <path d="M 190 114 C 199 126 198 142 187 150 C 182 138 184 122 190 114 Z" fill="#FF6B35" class="pulse-muscle"/>
+              <!-- Trapezius & Upper Spine -->
+              <path d="M 174 116 L 206 116 L 198 142 L 182 142 Z" fill="#233755" stroke="#16253B" stroke-width="1.5"/>
 
-              <!-- Muscular Arms & Elbows driving down -->
-              <g class="anim-lat">
-                <!-- Left Arm (Shoulder -> Bicep -> Forearm) -->
-                <path d="M 152 110 C 130 95 110 82 82 66" stroke="url(#humanSkin)" stroke-width="8" stroke-linecap="round" fill="none"/>
-                <!-- Right Arm -->
-                <path d="M 188 110 C 210 95 230 82 258 66" stroke="url(#humanSkin)" stroke-width="8" stroke-linecap="round" fill="none"/>
+              <!-- GLOWING LATISSIMUS DORSI MUSCLE WINGS (THE PRIMARY TARGET) -->
+              <g class="anim-lat-flare">
+                <!-- Left Wing Latissimus Dorsi -->
+                <path d="M 178 122 C 152 130 142 152 165 178 C 176 166 178 145 178 122 Z" 
+                      fill="url(#latMuscleGlow)" 
+                      filter="url(#hyperGlow)"
+                      stroke="#FF9100" 
+                      stroke-width="2.5"
+                />
+                <!-- Left Internal Muscle Striations -->
+                <path d="M 174 135 C 160 145 158 156 168 168" stroke="#FFE600" stroke-width="2" fill="none" opacity="0.9"/>
+                <path d="M 176 145 C 166 152 165 160 172 168" stroke="#FFE600" stroke-width="1.5" fill="none" opacity="0.8"/>
+
+                <!-- Right Wing Latissimus Dorsi -->
+                <path d="M 202 122 C 228 130 238 152 215 178 C 204 166 202 145 202 122 Z" 
+                      fill="url(#latMuscleGlow)" 
+                      filter="url(#hyperGlow)"
+                      stroke="#FF9100" 
+                      stroke-width="2.5"
+                />
+                <!-- Right Internal Muscle Striations -->
+                <path d="M 206 135 C 220 145 222 156 212 168" stroke="#FFE600" stroke-width="2" fill="none" opacity="0.9"/>
+                <path d="M 204 145 C 214 152 215 160 208 168" stroke="#FFE600" stroke-width="1.5" fill="none" opacity="0.8"/>
               </g>
 
-              <!-- Muscular Thighs locked under rollers -->
-              <path d="M 156 150 C 144 140 134 140 126 185" stroke="url(#humanSkin)" stroke-width="12" stroke-linecap="round" fill="none"/>
-              <path d="M 184 150 C 196 140 206 140 214 185" stroke="url(#humanSkin)" stroke-width="12" stroke-linecap="round" fill="none"/>
-              <rect x="114" y="185" width="22" height="8" rx="3" fill="#16253B"/>
-              <rect x="204" y="185" width="22" height="8" rx="3" fill="#16253B"/>
+              <!-- Rear Deltoids & Rhomboids (Helper Muscles) -->
+              <circle cx="162" cy="122" r="11" fill="url(#helperMuscleGlow)"/>
+              <circle cx="218" cy="122" r="11" fill="url(#helperMuscleGlow)"/>
+
+              <!-- Lower Back & Glute Posture Base -->
+              <path d="M 172 176 L 208 176 L 204 195 L 176 195 Z" fill="#16253B"/>
+
+              <!-- MUSCULAR ARMS GRIPPING WIDE BAR (Animated with Lat Pulldown) -->
+              <g class="anim-arms-rig">
+                <!-- Left Arm: Deltoid -> Bicep -> Forearm gripping bar -->
+                <path d="M 162 122 C 130 110 98 95 82 72" stroke="url(#bodySkin)" stroke-width="11" stroke-linecap="round" fill="none"/>
+                <!-- Left Hand wrap around bar -->
+                <circle cx="82" cy="72" r="7" fill="#FAF8F4" stroke="#09101C" stroke-width="1.5"/>
+
+                <!-- Right Arm: Deltoid -> Bicep -> Forearm gripping bar -->
+                <path d="M 218 122 C 250 110 282 95 298 72" stroke="url(#bodySkin)" stroke-width="11" stroke-linecap="round" fill="none"/>
+                <!-- Right Hand wrap around bar -->
+                <circle cx="298" cy="72" r="7" fill="#FAF8F4" stroke="#09101C" stroke-width="1.5"/>
+              </g>
+
+              <!-- Muscular Thighs Anchored Under Thigh Pads -->
+              <path d="M 174 190 C 158 175 146 168 138 215" stroke="url(#bodySkin)" stroke-width="14" stroke-linecap="round" fill="none"/>
+              <path d="M 206 190 C 222 175 234 168 242 215" stroke="url(#bodySkin)" stroke-width="14" stroke-linecap="round" fill="none"/>
+
+              <!-- BIOMECHANICAL REAL-TIME POSTURE HUD CALLOUTS -->
+              <g>
+                <!-- Glowing Target Label Flag -->
+                <rect x="95" y="235" width="190" height="20" rx="5" fill="#09101C" stroke="#FF4800" stroke-width="1.5"/>
+                <circle cx="108" cy="245" r="4" fill="#FF4800" class="animate-ping"/>
+                <circle cx="108" cy="245" r="3" fill="#FFE600"/>
+                <text x="118" y="249" fill="#FAF8F4" font-size="9" font-family="'Oswald', sans-serif" font-weight="bold" letter-spacing="0.08em">TARGET: LATISSIMUS DORSI (GLOWING)</text>
+
+                <!-- Posture Angle Indicator: 15 degree backward lean -->
+                <line x1="225" y1="125" x2="265" y2="125" stroke="#FFA47A" stroke-width="1" stroke-dasharray="3,2"/>
+                <line x1="225" y1="125" x2="260" y2="108" stroke="#FF6B35" stroke-width="1.5"/>
+                <text x="268" y="118" fill="#FFA47A" font-size="7.5" font-family="monospace">15° LEAN</text>
+              </g>
             </svg>
           `;
-        } else if (type === 'chest') {
+        }
+        else if (type === 'chest') {
           return `
             <svg viewBox="0 0 340 230" class="w-full h-full max-w-sm" xmlns="http://www.w3.org/2000/svg">
               <!-- Bench Frame & Backrest -->
@@ -1661,10 +1780,10 @@
 
       // Flexible Video Player: Detects Google Drive, YouTube, or direct MP4
       renderMachineVideoPlayer(machine) {
-        const vUrl = machine.videoUrl || '';
-        const yId = machine.youtubeId || '';
+        const vUrl = (machine.videoUrl || '').trim();
+        const yId = (machine.youtubeId || '').trim();
 
-        // Case 1: Google Drive Link (drive.google.com/file/d/FILE_ID/...)
+        // 1. Google Drive Link: Extract file ID and embed Drive preview player
         if (vUrl.includes('drive.google.com')) {
           let driveId = '';
           const match = vUrl.match(/\/d\/([a-zA-Z0-9_-]+)/) || vUrl.match(/id=([a-zA-Z0-9_-]+)/);
@@ -1673,19 +1792,18 @@
           if (driveId) {
             return `
               <iframe 
-                class="w-full h-full rounded-2xl" 
+                class="w-full h-full rounded-2xl border-0" 
                 src="https://drive.google.com/file/d/${driveId}/preview" 
                 title="${machine.name} Google Drive Workout Video" 
-                frameborder="0" 
-                allow="autoplay; encrypted-media" 
+                allow="autoplay; encrypted-media; fullscreen" 
                 allowfullscreen
               ></iframe>
             `;
           }
         }
 
-        // Case 2: Direct MP4 or WebM video file
-        if (vUrl.endsWith('.mp4') || vUrl.endsWith('.webm')) {
+        // 2. Direct MP4 Video File or Data URI
+        if (vUrl.startsWith('data:video') || vUrl.endsWith('.mp4') || vUrl.endsWith('.webm')) {
           return `
             <video 
               autoplay loop muted playsinline controls 
@@ -1696,16 +1814,24 @@
           `;
         }
 
-        // Case 3: Default YouTube Demonstration
+        // 3. YouTube Embed Fallback
+        if (yId) {
+          return `
+            <iframe 
+              class="w-full h-full rounded-2xl border-0"
+              src="https://www.youtube-nocookie.com/embed/${yId}?autoplay=0&controls=1&rel=0&modestbranding=1" 
+              title="${machine.name} Real Workout Demonstration" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen
+            ></iframe>
+          `;
+        }
+
         return `
-          <iframe 
-            class="w-full h-full rounded-2xl"
-            src="https://www.youtube-nocookie.com/embed/${yId}?autoplay=0&controls=1&rel=0&modestbranding=1" 
-            title="${machine.name} Real Workout Demonstration" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen
-          ></iframe>
+          <div class="flex flex-col items-center justify-center p-6 text-center text-cream-300">
+            <i class="fa-solid fa-film text-2xl text-orange-accent mb-2"></i>
+            <p class="text-xs">No video URL configured</p>
+          </div>
         `;
       }
 
