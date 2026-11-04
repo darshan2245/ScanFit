@@ -1779,11 +1779,11 @@
       }
 
       // Flexible Video Player: Detects Google Drive, YouTube, or direct MP4
-      renderMachineVideoPlayer(machine) {
+            renderMachineVideoPlayer(machine) {
         const vUrl = (machine.videoUrl || '').trim();
         const yId = (machine.youtubeId || '').trim();
 
-        // 1. Google Drive Link: Extract file ID and embed Drive preview player
+        // 1. Google Drive Embed (Autoplay permitted via iframe policy)
         if (vUrl.includes('drive.google.com')) {
           let driveId = '';
           const match = vUrl.match(/\/d\/([a-zA-Z0-9_-]+)/) || vUrl.match(/id=([a-zA-Z0-9_-]+)/);
@@ -1794,46 +1794,43 @@
               <iframe 
                 class="w-full h-full rounded-2xl border-0" 
                 src="https://drive.google.com/file/d/${driveId}/preview" 
-                title="${machine.name} Google Drive Workout Video" 
-                allow="autoplay; encrypted-media; fullscreen" 
+                title="${machine.name} Workout Video" 
+                allow="autoplay; fullscreen" 
                 allowfullscreen
               ></iframe>
             `;
           }
         }
 
-        // 2. Direct MP4 Video File or Data URI
-        if (vUrl.startsWith('data:video') || vUrl.endsWith('.mp4') || vUrl.endsWith('.webm')) {
+        // 2. Direct MP4 / WebM / Local Gym Video (Guaranteed Instant Autoplay + Endless Loop)
+        if (vUrl.endsWith('.mp4') || vUrl.endsWith('.webm') || vUrl.startsWith('data:video')) {
           return `
             <video 
-              autoplay loop muted playsinline controls 
+              autoplay 
+              loop 
+              muted 
+              playsinline 
+              controls 
               class="w-full h-full object-contain rounded-2xl"
+              onloadeddata="this.play();"
             >
               <source src="${vUrl}" type="video/mp4">
             </video>
           `;
         }
 
-        // 3. YouTube Embed Fallback
-        if (yId) {
-          return `
-            <iframe 
-              class="w-full h-full rounded-2xl border-0"
-              src="https://www.youtube-nocookie.com/embed/${yId}?autoplay=0&controls=1&rel=0&modestbranding=1" 
-              title="${machine.name} Real Workout Demonstration" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-              allowfullscreen
-            ></iframe>
-          `;
-        }
-
+        // 3. YouTube Embed (Autoplay + Infinite Muted Loop)
         return `
-          <div class="flex flex-col items-center justify-center p-6 text-center text-cream-300">
-            <i class="fa-solid fa-film text-2xl text-orange-accent mb-2"></i>
-            <p class="text-xs">No video URL configured</p>
-          </div>
+          <iframe 
+            class="w-full h-full rounded-2xl border-0"
+            src="https://www.youtube-nocookie.com/embed/${yId}?autoplay=1&mute=1&loop=1&playlist=${yId}&controls=1&modestbranding=1" 
+            title="${machine.name} Real Workout Demonstration" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen
+          ></iframe>
         `;
       }
+
 
       togglePlayState() {
         this.animPlaying = !this.animPlaying;
