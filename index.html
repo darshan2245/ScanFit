@@ -2053,17 +2053,33 @@
         // Daily Water Recommendation: ~35ml/kg + 500ml for workout
         const waterLiters = +((weightKg * 0.035) + 0.5).toFixed(1);
 
-        const messTips = [];
+                const messTips = [];
         if (dietPref === 'veg') {
-          messTips.push({ item: 'Mess Dal & Sambar', portion: '2 full katori / meal', reason: 'Liquid protein, lentil amino acids & hydration' });
-          messTips.push({ item: 'Curd / Buttermilk', portion: '1-2 bowls daily', reason: 'Probiotic digestion, casein protein & cooling' });
-          messTips.push({ item: 'Sprouts / Soaked Chana', portion: '1 bowl at breakfast', reason: 'High fiber, vitamins & slow-digesting carbs' });
-          messTips.push({ item: 'Paneer / Soya Chunks', portion: '60-80g on special dinners', reason: 'Highest vegetarian protein density available in mess' });
+          // --- IIT DHARWAD HOSTEL MESS MENU (VEGETARIAN) ---
+          messTips.push({ item: '[Breakfast] Mix Sprouts & Boiled Chana', portion: '1 full bowl daily', reason: 'Clean morning fiber, complex carbs & plant protein base' });
+          messTips.push({ item: '[Breakfast] Mess Milk (200ml) & Banana', portion: '1 glass + 1 banana', reason: 'Whey/casein foundation with potassium for morning energy' });
+          messTips.push({ item: '[Lunch] Daily Dal / Sambar / Rasam', portion: '2 full bowls / lunch', reason: 'Toor Dal, Dal Panchratna, Dal Tadka & Dal Fry' });
+          messTips.push({ item: '[Lunch Special] Chole & Rajma Days', portion: '1.5 bowls (Mon & Sat)', reason: 'Chole Masala (Mon) & Rajma Masala (Sat) high-protein staples' });
+          messTips.push({ item: '[Lunch & Dinner] Curd / Lassi / Solkadhi', portion: '1-2 cups daily', reason: 'Lassi (Mon), Solkadhi (Wed), Curd Rice (Sat) for probiotic digestion' });
+          messTips.push({ item: '[Snacks - 4:30 pm] Bananas & Cut Fruits', portion: '1-2 bananas + tea', reason: 'Clean pre-workout glycogen fuel before evening gym sessions' });
+          messTips.push({ item: '[Dinner Special] Kadhai Paneer & Dal Fry', portion: 'Full katori (Wed dinner)', reason: 'Dense vegetarian muscle recovery on mid-week training days' });
+          messTips.push({ item: '[Dinner Special] Paneer Butter Masala', portion: 'Full katori (Fri dinner)', reason: 'High-calorie & casein recovery ahead of weekend workouts' });
+          messTips.push({ item: '[Dinner Special] Soya Bean Masala & Paneer Chilli', portion: '4 pcs paneer + soya (Sat)', reason: 'Highest vegetarian protein meal of the week (30g+ protein)' });
+          messTips.push({ item: '[Dinner] Sprouts Aloo Methi & Palak Corn', portion: '1 plate (Mon & Tue)', reason: 'Micronutrients, dietary iron & magnesium for muscle repair' });
         } else {
-          messTips.push({ item: 'Mess Boiled Eggs', portion: '3-4 whites + 1 whole egg daily', reason: 'Gold standard complete bioavailable protein (18-24g)' });
-          messTips.push({ item: 'Mess Chicken Curry', portion: '2-3 solid pieces (drain gravy oil)', reason: 'High-density lean protein source' });
-          messTips.push({ item: 'Curd with Dinner', portion: '1 bowl with roti / rice', reason: 'Aids digestive enzyme production and prevents bloating' });
+          // --- IIT DHARWAD HOSTEL MESS MENU (NON-VEG / EGGITARIAN) ---
+          messTips.push({ item: '[Breakfast] Boiled Eggs (Mess Counter)', portion: '3-4 eggs (Sun, Mon, Wed, Thu, Sat)', reason: '18-24g bioavailable albumin protein to kickstart recovery' });
+          messTips.push({ item: '[Breakfast] Egg Bhurji & Omelette Days', portion: 'Full portion (Tue & Fri)', reason: 'Hot high-protein breakfast (Omelette on Tue, Egg Bhurji on Fri)' });
+          messTips.push({ item: '[Breakfast] Mix Sprouts & 200ml Milk', portion: '1 bowl + 1 glass milk', reason: 'Essential micronutrients, bone calcium & casein foundation' });
+          messTips.push({ item: '[Lunch Special] Egg Biryani & Egg Curry', portion: '2 eggs with rice (Wed & Sat)', reason: 'Egg Biryani (Wed lunch) & Egg Curry with Dal (Sat lunch)' });
+          messTips.push({ item: '[Lunch] Dal Tadka / Panchratna + Curd', portion: '2 bowls dal + 1 cup curd', reason: 'Digestive cooling, complete amino acid profile & hydration' });
+          messTips.push({ item: '[Snacks - 4:30 pm] Bananas & 200ml Milk', portion: '1-2 bananas 45m pre-gym', reason: 'Fast-digesting pre-workout carbohydrates from the mess snack counter' });
+          messTips.push({ item: '[Dinner Special] Chicken Curry & Dal Fry', portion: '2-3 chicken pieces (Wed dinner)', reason: 'Lean poultry protein to rebuild chest & back muscle fibers' });
+          messTips.push({ item: '[Dinner Special] Chicken Butter Masala', portion: '2-3 solid pieces (Fri dinner)', reason: 'Dense protein & recovery calories for high-intensity training' });
+          messTips.push({ item: '[Dinner Special] Chicken Biryani & Raita', portion: 'Full plate (Sun dinner)', reason: 'High-calorie weekend refuel to prepare for Monday gym splits' });
+          messTips.push({ item: '[Dinner Special] Soya Bean Masala', portion: '1 bowl (Sat dinner)', reason: 'Bonus plant-protein boost on Saturday evening' });
         }
+
 
         const canteenAddons = [
           { item: 'Bananas', timing: '30-45 mins pre-workout', why: 'Instant potassium and natural glycogen energy' },
